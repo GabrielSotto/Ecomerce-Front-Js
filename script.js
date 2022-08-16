@@ -3,18 +3,18 @@
 // let darkMode = document.getElementById("darkMode");
 // let body = document.getElementById("body");
 
-function cambiarModo() {
-  if (body.classList.contains("dark")) {
-    darkMode.innerText = "Dark";
-    darkMode.classList.remove("btn-light");
-    darkMode.classList.add("btn-dark");
-  } else {
-    darkMode.innerText = "Light";
-    darkMode.classList.remove("btn-dark");
-    darkMode.classList.add("btn-light");
-  }
-  body.classList.toggle("dark");
-}
+// function cambiarModo() {
+//   if (body.classList.contains("dark")) {
+//     darkMode.innerText = "Dark";
+//     darkMode.classList.remove("btn-light");
+//     darkMode.classList.add("btn-dark");
+//   } else {
+//     darkMode.innerText = "Light";
+//     darkMode.classList.remove("btn-dark");
+//     darkMode.classList.add("btn-light");
+//   }
+//   body.classList.toggle("dark");
+// }
 
 //PRODUCTS
 
@@ -30,12 +30,11 @@ let getProduct = async () => {
     let btnCompra = document.querySelectorAll(".botonCompra");
 
     for (let boton of btnCompra) {
-      boton.addEventListener("click", agregarACarrito);
+      boton.addEventListener("click", addCart);
     }
   } catch (error) {
     console.log(error)
   }
-
 }
 getProduct();
 
@@ -62,12 +61,11 @@ function showProducts(products) {
 
 showProducts(products);
 
-
 //CART
 
 let carrito = [];
 
-function agregarACarrito(e) {
+function addCart(e) {
   let hijo = e.target;
   let padre = hijo.parentNode;
   let abuelo = padre.parentNode;
@@ -103,14 +101,13 @@ function mostrarCarrito() {
   for (let producto of carrito)
   {
     let fila = document.createElement("tr");
-    fila.setAttribute("class", "fila")
+    // fila.setAttribute("class", "fila")
     fila.innerHTML = `<td><img src="${producto.img}"></td>
                         <td>${producto.precio}</td>
                         <td>${producto.nombre}</td>
                         <td><button class="btn-danger borrarElemento">Borrar</button></td>`;
-  
     let tabla = document.getElementById("tbody");
-  
+
     tabla.append(fila);
   }
 
@@ -133,24 +130,24 @@ function borrarProducto(e) {
   }).showToast();
 }
 
-//SEARCH
-let search = document.querySelector("#input");
-
-search.addEventListener("keyup", (e)=>{
-  let texto = e.target.value
-})
-
-//CATEGORY FILTERS
-let mens = document.querySelector(".men")
-mens.addEventListener("click", showCategory);
-
-function showCategory(products){
-
-}
-
-
-
-
 
 let icon=document.querySelector("#iconCart");
 icon.addEventListener("click", mostrarCarrito);
+
+
+
+//SEARCH FILTERS
+let search = document.querySelector("#input");
+
+search.addEventListener("keyup", (e)=>{
+  let productFilter = products.filter(product => product.title.toLowerCase().includes(e.target.value))||(product => product.category.toLowerCase().includes(e.target.value));
+  console.log(productFilter);
+})
+
+//CATEGORY FILTERS
+// let mens = document.querySelector(".men")
+// mens.addEventListener("click", showCategory);
+
+// function showCategory(products){
+
+// }
