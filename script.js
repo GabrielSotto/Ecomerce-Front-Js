@@ -101,7 +101,7 @@ function mostrarCarrito() {
   for (let producto of carrito)
   {
     let fila = document.createElement("tr");
-    // fila.setAttribute("class", "fila")
+
     fila.innerHTML = `<td><img src="${producto.img}"></td>
                         <td>${producto.precio}</td>
                         <td>${producto.nombre}</td>
@@ -140,14 +140,11 @@ icon.addEventListener("click", mostrarCarrito);
 let search = document.querySelector("#input");
 
 search.addEventListener("keyup", (e)=>{
-  let productFilter = products.filter(product => product.title.toLowerCase().includes(e.target.value))||(product => product.category.toLowerCase().includes(e.target.value));
+
+  const input = e.target.value.toLowerCase()
+
+  let productFilter = products.filter(product => product.title.toLowerCase().includes(input))||(product => product.category.toLowerCase().includes(input));
+
   console.log(productFilter);
+
 })
-
-//CATEGORY FILTERS
-// let mens = document.querySelector(".men")
-// mens.addEventListener("click", showCategory);
-
-// function showCategory(products){
-
-// }
